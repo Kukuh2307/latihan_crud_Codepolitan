@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\HelloController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,6 @@ Route::resource('helloController', HelloController::class);
 
 // contoh route custom mengggunakan controller get
 Route::get('helloControllerCustom',[HelloController::class,'Hello']);
+
+// contoh route custom menggunakan controller get dari /article
+Route::get('article',[ArticleController::class, 'index']);
