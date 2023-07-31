@@ -9,13 +9,9 @@ class ArticleController extends Controller
 {
     public function index(){
         $storage = Storage::get('articles.txt');
-        echo $storage;
-        exit;
+        $storage = explode("\n",$storage);
         $variable = [
-            'articles' => [
-                ['mengenal laravel','ini adalah contoh array static'],
-                ['mengenal Codepolitan', 'ini adalah platform belajar online']
-            ]
+            'articles' => $storage
         ];
         return view('article.index',$variable);
     }

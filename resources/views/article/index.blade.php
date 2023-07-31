@@ -19,18 +19,19 @@
 </head>
 <body>
     <div class="container">
-        @php($number = 1)
-    <h1>Ini adalah content dari article</h1>
-    @foreach ($articles as $article)
-        <div class="article">
-            <h3>
-                <small>{{ $number }}</small>
-                {{ $article[0] }}
-            </h3>
-            <p>{{ $article[1] }}</p>
+        <h1>Ini adalah content dari article</h1>
+        @foreach ($articles as $article)
+        @php($article = explode(',', $article))
+        @dd($article)
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ $article[1] }}</h5>
+                <p class="card-text">{{ $article[2] }}</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated at {{ date("d M Y H:i", strtotime($article[3])) }}</small></p>
+                <a href="#" class="btn btn-primary">Selengkapnya</a>
+            </div>
         </div>
-        @php($number++)
-    @endforeach
+        @endforeach
     </div>
 </body>
 </html>
