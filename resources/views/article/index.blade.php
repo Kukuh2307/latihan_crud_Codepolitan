@@ -20,7 +20,7 @@
 <body>
     <div class="container">
         <h1>Ini adalah content dari article
-            <a href="{{ "article/create" }}"><button class="btn btn-primary">Tambah Artikel</button></a> 
+            <a href="{{ url("article/create") }}"><button class="btn btn-primary">Tambah Artikel</button></a> 
             
         </h1>
         @foreach ($articles as $article)

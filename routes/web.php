@@ -15,27 +15,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// contoh default route
+// default route
 Route::get('/', function () {
     return view('welcome');
 });
 
-// contoh route menggunakan fungsi untuk menampilkan view hello
+// route menggunakan fungsi untuk menampilkan view hello
 Route::get('hello', function () {
     return view('hello');
 });
 
-// contoh route menggunakan controller --resource
+// route menggunakan controller --resource
 Route::resource('helloController', HelloController::class);
 
-// contoh route custom mengggunakan controller get
+// route custom mengggunakan controller get
 Route::get('helloControllerCustom', [HelloController::class, 'Hello']);
 
-// contoh route custom menggunakan controller get dari /article
+// route custom menggunakan controller get dari /article
 Route::get('article', [ArticleController::class, 'index']);
 
-// route untuk menambahkan artikel baru
+// route artikel baru
 Route::get('article/create', [ArticleController::class, 'create']);
 
-// route untuk menampilkan detail artikel
+// menginptkan artikel baru
+Route::post('article', [ArticleController::class, 'store']);
+
+// route detail artikel
 Route::get('article/{id}', [ArticleController::class, 'show']);
