@@ -30,7 +30,7 @@
                 <h5 class="card-title">{{ $article[1] }}</h5>
                 <p class="card-text">{{ $article[2] }}</p>
                 <p class="card-text"><small class="text-body-secondary">Last updated at {{ date("d M Y H:i", strtotime($article[3])) }}</small></p>
-                <a href="{{ $article[0] }}" class="btn btn-primary">Selengkapnya</a>
+                <a href="{{ url("article/$article[0]") }}" class="btn btn-primary">Selengkapnya</a>
             </div>
         </div>
         @endforeach

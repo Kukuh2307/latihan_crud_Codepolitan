@@ -11,7 +11,9 @@ class ArticleController extends Controller
     public function index()
     {
         $storage = Storage::get('articles.txt');
+        // untuk memisahkan format \n
         $storage = explode("\n", $storage);
+        // data akan di tampung dalam variabel lalu di kirim ke view
         $variable = [
             'articles' => $storage
         ];
@@ -27,7 +29,23 @@ class ArticleController extends Controller
     // menampilkan detail artikel
     public function show($id)
     {
+        $storage = Storage::get('articles.txt');
+        $storage = explode("\n", $storage);
+        $selected = array();
+        // melakukan looping semua data
+        foreach ($storage as $st) {
+            // memecahkan format koma
+            $st = explode(",", $st);
+            // pengkondisian untuk mencocokkan id
+            if ($st[0] == $id) {
+                // menampung data yang sudah terseleksi
+                $selected = $st;
+            }
+        }
+        $variable = [
+            'article' => $selected
+        ];
 
-        return view('article.show');
+        return view('article.show', $variable);
     }
 }

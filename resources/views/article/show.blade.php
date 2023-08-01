@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Artikel | Detail </title>
+    <title>Artikel | Detail {{ $article[1] }}</title>
         {{-- CSS --}}
         <link href="{{ asset('../../bootstrap-5/css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
@@ -17,10 +17,13 @@
 <body>
     <div class="container">
         <article class="blog-post">
-            <h2 class="display-5 link-body-emphasis mb-1">Sample blog post</h2>
-            <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p>
-            <p>ini konten</p>
+            <h2 class="display-5 link-body-emphasis mb-1">{{ $article[1] }}</h2>
+            <p class="blog-post-meta">{{ date("d M Y H:i", strtotime($article[3])) }}</p>
+            <p>{{ $article[2] }}</p>
         </article>
+        <a href="{{ url('article') }}">
+            <button class="btn btn-primary">< Kembali</button>
+        </a>
     </div>
 </body>
 </html>
