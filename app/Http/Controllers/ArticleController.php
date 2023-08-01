@@ -7,12 +7,27 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
-    public function index(){
+    // menampilkan semua data artikel
+    public function index()
+    {
         $storage = Storage::get('articles.txt');
-        $storage = explode("\n",$storage);
+        $storage = explode("\n", $storage);
         $variable = [
             'articles' => $storage
         ];
-        return view('article.index',$variable);
+        return view('article.index', $variable);
+    }
+
+    // membuat artikel baru
+    public function create()
+    {
+        return view('article.create');
+    }
+
+    // menampilkan detail artikel
+    public function show($id)
+    {
+
+        return view('article.show');
     }
 }

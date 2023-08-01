@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 // contoh route menggunakan fungsi untuk menampilkan view hello
-Route::get('hello', function(){
+Route::get('hello', function () {
     return view('hello');
 });
 
@@ -29,7 +29,13 @@ Route::get('hello', function(){
 Route::resource('helloController', HelloController::class);
 
 // contoh route custom mengggunakan controller get
-Route::get('helloControllerCustom',[HelloController::class,'Hello']);
+Route::get('helloControllerCustom', [HelloController::class, 'Hello']);
 
 // contoh route custom menggunakan controller get dari /article
-Route::get('article',[ArticleController::class, 'index']);
+Route::get('article', [ArticleController::class, 'index']);
+
+// route untuk menambahkan artikel baru
+Route::get('article/create', [ArticleController::class, 'create']);
+
+// route untuk menampilkan detail artikel
+Route::get('article/{id}', [ArticleController::class, 'show']);
