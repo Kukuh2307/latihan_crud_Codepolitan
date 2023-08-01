@@ -48,4 +48,13 @@ class ArticleController extends Controller
 
         return view('article.show', $variable);
     }
+
+    // fungsi input data
+    public function store(Request $request)
+    {
+        // menangkanp input dari view create.blade.php
+        $title = $request->input('tittle');
+        $content = $request->input('content');
+        @dd($title, $content);
+    }
 }

@@ -15,6 +15,7 @@
     <div class="container">
         <h1>Tambah Artikel</h1>
         <form action="{{ url("article") }}" method="POST" class="form-control">
+            @csrf
             <div class="mb-3">
                 <label for="tittle" class="form-label">Judul :</label>
                 <input type="text" class="form-control" id="tittle" name="tittle">
