@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
@@ -64,32 +65,13 @@ class ArticleController extends Controller
         $content = $request->input('content');
         // @dd($title, $content);
 
-        // proses memasukkan data,langkah pertama membaca file
-        $storage = Storage::get('articles.txt');
-        $storage = explode("\n", $storage);
-
-        // menampung data inputan dalam array 
-        $input_data = [
-            count($storage) + 1,
-            $title,
-            $content,
-            date("Y:m:d H:i:s")
-        ];
-
-        // menggabungkan array menjadi 1 string
-        $input_data = implode(',', $input_data);
-        // @dd($input_data);
-
-        // menggabungkan data lama dengan inputan baru
-        array_push($storage, $input_data);
-        // @dd($storage);
-
-        // menggabungkan data array menjadi 1 string
-        $storage = implode("\n", $storage);
-        // @dd($storage);
-
-        // menyimpan data baru ke dalam file dengan cara menimpa data lama dengan data baru
-        Storage::write('articles.txt', $storage);
+        // proses memasukkan data pada database
+        DB::table('articles')->insert([
+            'title' => $title,
+            'content' => $content,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
         // redirect ke halaman awal
         return redirect('article');
