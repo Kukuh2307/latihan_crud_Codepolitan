@@ -29,22 +29,52 @@ class ArticleController extends Controller
     // menampilkan form edit data
     public function edit($id)
     {
+
+        // menyeleksi data dari database untuk di tampilkan
         $selected = DB::table('articles')->select('id', 'title', 'content', 'updated_at')->where('id', $id)->first();
 
+        // ditampung ke dalam variable
         $variable = [
             'articles' => $selected
         ];
+
+        // mengirim ke bagian form edit
         return view('.article.edit', $variable);
+    }
+
+    // mengirim perubahan data ke database
+    public function update(Request $request, $id)
+    {
+
+        // mengambil semua data yang diperlukan untuk di update
+        $title = $request->input('tittle');
+        $content = $request->input('content');
+        // dd($title, $content);
+
+        // mengirim ke database
+        DB::table('articles')->where('id', $id)->update([
+            'title' => $title,
+            'content' => $content,
+            'updated_at' => now(),
+        ]);
+
+        // melakukan readirect
+        return redirect("article");
     }
 
     // menampilkan detail artikel
     public function show($id)
     {
+
+        // menyeleksi data dari database untuk di tampilkan
         $selected = DB::table('articles')->select('id', 'title', 'content', 'created_at')->where('id', $id)->first();
+
+        // menampung ke dalam variabel
         $variable = [
             'article' => $selected
         ];
 
+        // mengirim ke bagian view
         return view('article.show', $variable);
     }
 

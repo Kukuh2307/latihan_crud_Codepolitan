@@ -47,4 +47,4 @@ Route::post('article', [ArticleController::class, 'store']);
 Route::get('article/{id}', [ArticleController::class, 'show']);
 
 // mengirim perubahan edit ke database
-Route::patch('article{id}', [ArticleController::class, 'update']);
+Route::patch('article/{id}', [ArticleController::class, 'update']);
