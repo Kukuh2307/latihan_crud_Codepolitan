@@ -24,13 +24,12 @@
             
         </h1>
         @foreach ($articles as $article)
-        @php($article = explode(',', $article))
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title">{{ $article[1] }}</h5>
-                <p class="card-text">{{ $article[2] }}</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated at {{ date("d M Y H:i", strtotime($article[3])) }}</small></p>
-                <a href="{{ url("article/$article[0]") }}" class="btn btn-primary">Selengkapnya</a>
+                {{-- <h5 class="card-title">{{ $article->title }}</h5> --}}
+                <p class="card-text">{{ $article->content }}</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated at {{ date("d M Y H:i", strtotime($article->created_at)) }}</small></p>
+                <a href="{{ url("article/$article->id") }}" class="btn btn-primary">Selengkapnya</a>
             </div>
         </div>
         @endforeach

@@ -11,10 +11,7 @@ class ArticleController extends Controller
     // menampilkan semua data artikel
     public function index()
     {
-        $storage = Storage::get('articles.txt');
-
-        // untuk memisahkan format \n
-        $storage = explode("\n", $storage);
+        $storage = DB::table('articles')->get();
 
         // data akan di tampung dalam variabel lalu di kirim ke view
         $variable = [
