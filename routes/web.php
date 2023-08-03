@@ -48,3 +48,6 @@ Route::get('article/{id}', [ArticleController::class, 'show']);
 
 // mengirim perubahan edit ke database
 Route::patch('article/{id}', [ArticleController::class, 'update']);
+
+// menghapus artikel
+Route::delete('article/{id}', [ArticleController::class, 'destroy']);

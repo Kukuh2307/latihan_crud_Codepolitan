@@ -26,6 +26,12 @@
                 <textarea class="form-control" id="content" name="content" rows="3">{{ $articles->content }}</textarea>
               </div>
               <button type="submit" class="btn btn-primary">Ubah</button>
+
+              <form action="{{ url("article/{$articles->id}") }}" >
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="btn btn-danger">Hapus</button>
+            </form>
         </form>
     </div>
 </body>

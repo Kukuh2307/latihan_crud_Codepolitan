@@ -98,4 +98,11 @@ class ArticleController extends Controller
         // redirect ke halaman awal
         return redirect('article');
     }
+
+    // menghapus data
+    public function destroy($id)
+    {
+        DB::table('articles')->where('id', $id)->delete();
+        return redirect('article');
+    }
 }
