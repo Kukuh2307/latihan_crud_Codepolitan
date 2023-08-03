@@ -29,23 +29,7 @@ class ArticleController extends Controller
     // menampilkan detail artikel
     public function show($id)
     {
-        $storage = Storage::get('articles.txt');
-        $storage = explode("\n", $storage);
-        $selected = array();
-
-        // melakukan looping semua data
-        foreach ($storage as $st) {
-
-            // memecahkan format koma
-            $st = explode(",", $st);
-
-            // pengkondisian untuk mencocokkan id
-            if ($st[0] == $id) {
-
-                // menampung data yang sudah terseleksi
-                $selected = $st;
-            }
-        }
+        $selected = DB::table('articles')->select('id', 'title', 'content', 'created_at')->where('id', $id)->first();
         $variable = [
             'article' => $selected
         ];
