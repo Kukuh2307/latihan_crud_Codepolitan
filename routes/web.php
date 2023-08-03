@@ -37,8 +37,14 @@ Route::get('article', [ArticleController::class, 'index']);
 // route artikel baru
 Route::get('article/create', [ArticleController::class, 'create']);
 
+// route edit artikel
+Route::get('article/{id}/edit', [ArticleController::class, 'edit']);
+
 // menginptkan artikel baru
 Route::post('article', [ArticleController::class, 'store']);
 
 // route detail artikel
 Route::get('article/{id}', [ArticleController::class, 'show']);
+
+// mengirim perubahan edit ke database
+Route::patch('article{id}', [ArticleController::class, 'update']);

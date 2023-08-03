@@ -26,6 +26,17 @@ class ArticleController extends Controller
         return view('article.create');
     }
 
+    // menampilkan form edit data
+    public function edit($id)
+    {
+        $selected = DB::table('articles')->select('id', 'title', 'content', 'updated_at')->where('id', $id)->first();
+
+        $variable = [
+            'articles' => $selected
+        ];
+        return view('.article.edit', $variable);
+    }
+
     // menampilkan detail artikel
     public function show($id)
     {
