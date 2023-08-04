@@ -11,7 +11,7 @@ class ArticleController extends Controller
     // menampilkan semua data artikel
     public function index()
     {
-        $storage = DB::table('articles')->get();
+        $storage = DB::table('articles')->where('active', true)->get();
 
         // data akan di tampung dalam variabel lalu di kirim ke view
         $variable = [
