@@ -20,25 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// route menggunakan fungsi untuk menampilkan view hello
-Route::get('hello', function () {
-    return view('hello');
-});
-
-// route menggunakan controller --resource
-Route::resource('helloController', HelloController::class);
-
-// route custom mengggunakan controller get
-Route::get('helloControllerCustom', [HelloController::class, 'Hello']);
-
 // route custom menggunakan controller get dari /article
 Route::get('article', [ArticleController::class, 'index']);
 
 // route artikel baru
 Route::get('article/create', [ArticleController::class, 'create']);
-
-// route edit artikel
-Route::get('article/{id}/edit', [ArticleController::class, 'edit']);
 
 // menginptkan artikel baru
 Route::post('article', [ArticleController::class, 'store']);
@@ -51,3 +37,6 @@ Route::patch('article/{id}', [ArticleController::class, 'update']);
 
 // menghapus artikel
 Route::delete('article/{id}', [ArticleController::class, 'destroy']);
+
+// route edit artikel
+Route::get('article/{id}/edit', [ArticleController::class, 'edit']);

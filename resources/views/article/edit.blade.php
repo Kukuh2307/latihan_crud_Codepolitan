@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <h1>Tambah Artikel</h1>
-        <form action="{{ url("article/{ $articles->id }") }}" method="POST">
+        <form action="{{ url("article/{$articles->id}") }}" method="POST">
             @method('PATCH')
             @csrf
             <div class="mb-3">

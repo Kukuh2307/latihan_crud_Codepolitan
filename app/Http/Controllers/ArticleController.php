@@ -49,7 +49,7 @@ class ArticleController extends Controller
         // mengambil semua data yang diperlukan untuk di update
         $title = $request->input('tittle');
         $content = $request->input('content');
-        // dd($title, $content);
+        dd($title, $content);
 
         // mengirim ke database
         DB::table('articles')->where('id', $id)->update([
@@ -57,7 +57,7 @@ class ArticleController extends Controller
             'content' => $content,
             'updated_at' => now(),
         ]);
-
+        dd($title, $content, $id);
         // melakukan readirect
         return redirect("article");
     }
