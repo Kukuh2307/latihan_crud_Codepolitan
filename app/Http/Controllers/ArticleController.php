@@ -11,7 +11,7 @@ class ArticleController extends Controller
     // menampilkan semua data artikel
     public function index()
     {
-        $storage = DB::table('articles')->where('active', true)->get();
+        $storage = DB::table('articles')->get();
 
         // data akan di tampung dalam variabel lalu di kirim ke view
         $variable = [
@@ -24,6 +24,43 @@ class ArticleController extends Controller
     public function create()
     {
         return view('article.create');
+    }
+
+    // fungsi input data
+    public function store(Request $request)
+    {
+
+        // menangkanp input dari view create.blade.php
+        $title = $request->input('tittle');
+        $content = $request->input('content');
+        // @dd($title, $content);
+
+        // proses memasukkan data pada database
+        DB::table('articles')->insert([
+            'title' => $title,
+            'content' => $content,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // redirect ke halaman awal
+        return redirect('article');
+    }
+
+    // menampilkan detail artikel
+    public function show($id)
+    {
+
+        // menyeleksi data dari database untuk di tampilkan
+        $selected = DB::table('articles')->select('id', 'title', 'content', 'created_at')->where('id', $id)->first();
+
+        // menampung ke dalam variabel
+        $variable = [
+            'article' => $selected
+        ];
+
+        // mengirim ke bagian view
+        return view('article.show', $variable);
     }
 
     // menampilkan form edit data
@@ -49,7 +86,7 @@ class ArticleController extends Controller
         // mengambil semua data yang diperlukan untuk di update
         $title = $request->input('tittle');
         $content = $request->input('content');
-        dd($title, $content);
+        // dd($title, $content);
 
         // mengirim ke database
         DB::table('articles')->where('id', $id)->update([
@@ -57,46 +94,9 @@ class ArticleController extends Controller
             'content' => $content,
             'updated_at' => now(),
         ]);
-        dd($title, $content, $id);
+        // dd($title, $content, $id);
         // melakukan readirect
         return redirect("article");
-    }
-
-    // menampilkan detail artikel
-    public function show($id)
-    {
-
-        // menyeleksi data dari database untuk di tampilkan
-        $selected = DB::table('articles')->select('id', 'title', 'content', 'created_at')->where('id', $id)->first();
-
-        // menampung ke dalam variabel
-        $variable = [
-            'article' => $selected
-        ];
-
-        // mengirim ke bagian view
-        return view('article.show', $variable);
-    }
-
-    // fungsi input data
-    public function store(Request $request)
-    {
-
-        // menangkanp input dari view create.blade.php
-        $title = $request->input('tittle');
-        $content = $request->input('content');
-        // @dd($title, $content);
-
-        // proses memasukkan data pada database
-        DB::table('articles')->insert([
-            'title' => $title,
-            'content' => $content,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        // redirect ke halaman awal
-        return redirect('article');
     }
 
     // menghapus data

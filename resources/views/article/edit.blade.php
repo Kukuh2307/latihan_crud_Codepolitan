@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Tambah Artikel</h1>
+        <h1>Edit Artikel</h1>
         <form action="{{ url("article/{$articles->id}") }}" method="POST">
             @method('PATCH')
             @csrf
@@ -27,12 +27,13 @@
               </div>
               <button type="submit" class="btn btn-primary">Ubah</button>
 
-              <form action="{{ url("article/{$articles->id}") }}" >
-                @method('DELETE')
-                @csrf
-                <button type="submit" class="btn btn-danger">Hapus</button>
             </form>
-        </form>
+
+            <form action="{{ url("article/{$articles->id}") }}" method="POST" >
+              @method('DELETE')
+              @csrf
+              <button type="submit" class="btn btn-danger">Hapus</button>
+          </form>
     </div>
 </body>
 </html>

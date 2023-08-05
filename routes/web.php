@@ -32,11 +32,11 @@ Route::post('article', [ArticleController::class, 'store']);
 // route detail artikel
 Route::get('article/{id}', [ArticleController::class, 'show']);
 
-// mengirim perubahan edit ke database
-Route::patch('article/{id}', [ArticleController::class, 'update']);
+// route edit artikel
+Route::get('article/{id}/edit', [ArticleController::class, 'edit']);
 
 // menghapus artikel
 Route::delete('article/{id}', [ArticleController::class, 'destroy']);
 
-// route edit artikel
-Route::get('article/{id}/edit', [ArticleController::class, 'edit']);
+// mengirim perubahan edit ke database
+Route::patch('article/{id}', [ArticleController::class, 'update']);
