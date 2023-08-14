@@ -28,7 +28,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $article->title }}</h5>
                 <p class="card-text">{{ $article->content }}</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated at {{ date("d M Y H:i", strtotime($article->created_at)) }}</small></p>
+                <p class="card-text"><small class="text-body-secondary">Last updated at {{ date("d M Y H:i", strtotime($article->updated_at)) }}</small></p>
                 <a href="{{ url("article/$article->id") }}" class="btn btn-primary">Selengkapnya</a>
                 <a href="{{ url("article/$article->id/edit") }}" class="btn btn-warning">edit</a>
             </div>
