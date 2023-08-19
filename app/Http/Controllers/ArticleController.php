@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -11,7 +12,7 @@ class ArticleController extends Controller
     // menampilkan semua data artikel
     public function index()
     {
-        $storage = DB::table('articles')->get();
+        $storage = Article::where('active', true)->get();
 
         // data akan di tampung dalam variabel lalu di kirim ke view
         $variable = [
