@@ -58,10 +58,15 @@ class ArticleController extends Controller
 
         // menyeleksi data dari database untuk di tampilkan
         $selected = Article::where('id', $id)->first();
-
+        // mengambil method comment pada article model
+        $comments = $selected->comments()->get();
+        // mengambil custom method total komentar pada article model
+        $total_komentar = $selected->total_komentar();
         // menampung ke dalam variabel
         $variable = [
-            'article' => $selected
+            'article' => $selected,
+            'comments' => $comments,
+            'total_komentar' => $total_komentar,
         ];
 
         // mengirim ke bagian view

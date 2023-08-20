@@ -22,4 +22,10 @@ class Article extends Model
     {
         return $query->where('active', true);
     }
+
+    // membuat custom method untuk menjumlahkan semua komentar
+    public function total_komentar()
+    {
+        return $this->comments()->count();
+    }
 }
