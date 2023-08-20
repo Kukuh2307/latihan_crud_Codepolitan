@@ -41,11 +41,9 @@ class ArticleController extends Controller
         // proses memasukkan data pada database dengan coding sebelumnya
         // DB::table('articles')->insert
         // menjadi seperti di bawah untuk menerapkan model Article yang sudah di buat di bagian model
-        Article::insert([
+        Article::create([
             'title' => $title,
             'content' => $content,
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
 
         // redirect ke halaman awal

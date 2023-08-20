@@ -17,6 +17,20 @@ class Article extends Model
         // hasmany yang dimana pada tabel article memiliki 1 article dengan beberapa relasi ke tabel comment
         return $this->hasMany(Comment::class);
     }
+
+    // mengisi data slug secara otomatis berdasarkan tittle yang sudah di masukkan
+    public $fillable = [
+        'title',
+        'content',
+    ];
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($article) {
+            // mengisi slug dengan format huruf kecil dan mengganti tanda spasi dengan tanda -
+            $article->slug = strtolower(str_replace(' ', '-', $article->title));
+        });
+    }
     // membuat fungsi select data untuk di kirim ke controler
     public function scopeActive($query)
     {
