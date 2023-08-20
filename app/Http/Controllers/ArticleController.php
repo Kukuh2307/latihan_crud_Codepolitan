@@ -37,8 +37,10 @@ class ArticleController extends Controller
         $content = $request->input('content');
         // @dd($title, $content);
 
-        // proses memasukkan data pada database
-        DB::table('articles')->insert([
+        // proses memasukkan data pada database dengan coding sebelumnya
+        // DB::table('articles')->insert
+        // menjadi seperti di bawah untuk menerapkan model Article yang sudah di buat di bagian model
+        Article::insert([
             'title' => $title,
             'content' => $content,
             'created_at' => now(),
@@ -54,7 +56,7 @@ class ArticleController extends Controller
     {
 
         // menyeleksi data dari database untuk di tampilkan
-        $selected = DB::table('articles')->select('id', 'title', 'content', 'created_at')->where('id', $id)->first();
+        $selected = Article::where('id', $id)->first();
 
         // menampung ke dalam variabel
         $variable = [
@@ -70,7 +72,7 @@ class ArticleController extends Controller
     {
 
         // menyeleksi data dari database untuk di tampilkan
-        $selected = DB::table('articles')->select('id', 'title', 'content', 'updated_at')->where('id', $id)->first();
+        $selected = Article::where('id', $id)->first();
 
         // ditampung ke dalam variable
         $variable = [
@@ -91,7 +93,7 @@ class ArticleController extends Controller
         // dd($title, $content);
 
         // mengirim ke database
-        DB::table('articles')->where('id', $id)->update([
+        Article::where('id', $id)->update([
             'title' => $title,
             'content' => $content,
             'updated_at' => now(),
@@ -104,7 +106,7 @@ class ArticleController extends Controller
     // menghapus data
     public function destroy($id)
     {
-        DB::table('articles')->where('id', $id)->delete();
+        Article::where('id', $id)->delete();
         return redirect('article');
     }
 }
