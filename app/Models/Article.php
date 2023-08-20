@@ -11,6 +11,12 @@ class Article extends Model
     use HasFactory;
     use SoftDeletes;
 
+    // membuat relasi tabel article ke  tabel comment
+    public function comments()
+    {
+        // hasmany yang dimana pada tabel article memiliki 1 article dengan beberapa relasi ke tabel comment
+        return $this->hasMany(Comment::class);
+    }
     // membuat fungsi select data untuk di kirim ke controler
     public function scopeActive($query)
     {

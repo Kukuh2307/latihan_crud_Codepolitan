@@ -12,7 +12,8 @@ class ArticleController extends Controller
     // menampilkan semua data artikel
     public function index()
     {
-        // untuk menampikan data menggunakan model active dengan fungsi active
+        // untuk menampikan data menggunakan model active dengan fungsi active yang hanya akan menampilkan data yang active
+        // jika ingin menampilkan data yang sudah di hapus sebelumnya bisa menggunakan fungsi withTrased() setelah actice()
         $storage = Article::active()->get();
 
         // data akan di tampung dalam variabel lalu di kirim ke view
