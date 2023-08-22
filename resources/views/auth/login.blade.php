@@ -9,7 +9,11 @@
                 <h1 class="text-center">
                     Login
                 </h1>
-
+                @if (session()->has('error_massage'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('error_massage') }}
+                    </div>
+                @endif
                 <form action="{{ url('login') }}" method="POST" class="form-control">
                 @csrf
                     <div class="mb-3">
