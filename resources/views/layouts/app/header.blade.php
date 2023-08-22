@@ -10,7 +10,7 @@
               <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
     
             <div class="text-end">
-              <button type="button" class="btn btn-outline-light me-2">Login</button>
+              <a href="{{ url('login') }}" type="button" class="btn btn-outline-light me-2">Login</a>
             </div>
           </div>
         </div>

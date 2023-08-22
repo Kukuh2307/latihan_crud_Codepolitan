@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\HelloController;
+
+use App\Http\Controllers\AuthController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +22,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//route halaman login
+Route::get('login', [AuthController::class, 'login']);
+
+// route mengirim username dan password ketika login
+Route::post('login', [AuthController::class, 'authenticate']);
 
 // route custom menggunakan controller get dari /article
 Route::get('article', [ArticleController::class, 'index']);
