@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -39,10 +40,20 @@ class AuthController extends Controller
     // menambahkan data user ke dalam database
     public function register(Request $request)
     {
+        // validasi register
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:5|confirmed'
         ]);
+
+        // menambahkan data ke database
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password'))
+        ]);
+
+        return redirect('login');
     }
 }
