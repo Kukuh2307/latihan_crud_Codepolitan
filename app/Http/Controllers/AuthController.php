@@ -39,12 +39,10 @@ class AuthController extends Controller
     // menambahkan data user ke dalam database
     public function register(Request $request)
     {
-        // $email = $request->input('email');
-        // $password = $request->input('password');
-
-        // User::create([
-        //     'email' => $email,
-        //     'password' => $password
-        // ]);
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:5|confirmed'
+        ]);
     }
 }
