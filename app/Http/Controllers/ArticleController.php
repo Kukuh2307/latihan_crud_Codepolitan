@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,6 +13,10 @@ class ArticleController extends Controller
     // menampilkan semua data artikel
     public function index()
     {
+        // mencegah user mengakses halaman index tanpa login
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         // untuk menampikan data menggunakan model active dengan fungsi active yang hanya akan menampilkan data yang active
         // jika ingin menampilkan data yang sudah di hapus sebelumnya bisa menggunakan fungsi withTrased() setelah actice()
         $storage = Article::active()->get();
@@ -26,12 +31,20 @@ class ArticleController extends Controller
     // membuat artikel baru
     public function create()
     {
+        // mencegah user mengakses halaman create article tanpa login
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         return view('article.create');
     }
 
     // fungsi input data
     public function store(Request $request)
     {
+        // mencegah menambahan article tanpa login
+        if (!Auth::check()) {
+            return redirect('login');
+        }
 
         // menangkanp input dari view create.blade.php
         $title = $request->input('tittle');
@@ -53,7 +66,10 @@ class ArticleController extends Controller
     // menampilkan detail artikel
     public function show($id)
     {
-
+        // mencegah user mengakses halaman detail article tanpa login
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         // menyeleksi data dari database untuk di tampilkan
         $selected = Article::where('id', $id)->first();
         // mengambil method comment pada article model
@@ -74,6 +90,10 @@ class ArticleController extends Controller
     // menampilkan form edit data
     public function edit($id)
     {
+        // mencegah user mengakses halaman edit article tanpa login
+        if (!Auth::check()) {
+            return redirect('login');
+        }
 
         // menyeleksi data dari database untuk di tampilkan
         $selected = Article::where('id', $id)->first();
@@ -90,6 +110,10 @@ class ArticleController extends Controller
     // mengirim perubahan data ke database
     public function update(Request $request, $id)
     {
+        // mencegah user mengakses halaman update data tanpa login
+        if (!Auth::check()) {
+            return redirect('login');
+        }
 
         // mengambil semua data yang diperlukan untuk di update
         $title = $request->input('tittle');
@@ -110,6 +134,10 @@ class ArticleController extends Controller
     // menghapus data
     public function destroy($id)
     {
+        // mencegah user menghapus article tanpa login
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         Article::where('id', $id)->delete();
         return redirect('article');
     }

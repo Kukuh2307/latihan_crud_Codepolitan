@@ -26,6 +26,9 @@ Route::get('/', function () {
 //route halaman login
 Route::get('login', [AuthController::class, 'login']);
 
+// route halaman logout
+Route::get('logout', [AuthController::class, 'logout']);
+
 // route mengirim username dan password ketika login
 Route::post('login', [AuthController::class, 'authenticate']);
 
