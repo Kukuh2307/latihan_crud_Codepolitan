@@ -29,6 +29,7 @@
                         <button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </form>
+                <a href="register" type="submit" class="btn btn-success">Register</a>
             </div>
         </div>
     </div>

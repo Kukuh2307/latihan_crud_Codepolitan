@@ -29,6 +29,12 @@ Route::get('login', [AuthController::class, 'login']);
 // route halaman logout
 Route::get('logout', [AuthController::class, 'logout']);
 
+// route halaman form registrasi
+Route::get('register', [AuthController::class, 'registerForm']);
+
+// route menambahkan user ketika sudah registrasi
+Route::post('register', [AuthController::class, 'register']);
+
 // route mengirim username dan password ketika login
 Route::post('login', [AuthController::class, 'authenticate']);
 
