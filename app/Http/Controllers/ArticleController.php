@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ArticlePosted;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -59,6 +61,8 @@ class ArticleController extends Controller
             'content' => $content,
         ]);
 
+        // mengirim email untuk pemberitahuan 
+        Mail::to('kukuhagung12@gmail.com', 'kukuh agung')->send(new ArticlePosted()); // Perbaikan pada alamat email
         // redirect ke halaman awal
         return redirect('article');
     }
