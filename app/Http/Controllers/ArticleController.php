@@ -56,13 +56,15 @@ class ArticleController extends Controller
         // proses memasukkan data pada database dengan coding sebelumnya
         // DB::table('articles')->insert
         // menjadi seperti di bawah untuk menerapkan model Article yang sudah di buat di bagian model
-        Article::create([
+        $article = Article::create([
             'title' => $title,
             'content' => $content,
         ]);
 
         // mengirim email untuk pemberitahuan 
-        Mail::to('kukuhagung12@gmail.com', 'kukuh agung')->send(new ArticlePosted()); // Perbaikan pada alamat email
+        // untuk alur integrasi email dengan data database adalah semua variable di tampung lalu di kirimkan di mailer dengan parameter variabel tersebut.
+        // Auth::user digunakan untuk mengambil email user yang sedang login
+        Mail::to(Auth::user()->email)->send(new ArticlePosted($article)); // Perbaikan pada alamat email
         // redirect ke halaman awal
         return redirect('article');
     }

@@ -13,13 +13,15 @@ use Illuminate\Queue\SerializesModels;
 class ArticlePosted extends Mailable
 {
     use Queueable, SerializesModels;
-
+    // membuat construct untuk mengambil data dari database agar di tampilkan di email
+    protected $article;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($article)
     {
-        //
+        // variable $article di dapat dari controller article dan di masukkan ke dalam variable protected $article. dari situ lah kita bisa mengambil nilai yang ada di dalamnya untuk di tampilkan pada email
+        $this->article = $article;
     }
 
     /**
@@ -28,8 +30,8 @@ class ArticlePosted extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('kukuhagung12@gmail.com', 'Kukhuh Agung'),
-            subject: 'Article Sukses di upload',
+            from: new Address('admin@gmail.com', 'Admin'),
+            subject: "Article Baru Anda:    {$this->article->title}",
         );
     }
 
@@ -40,6 +42,9 @@ class ArticlePosted extends Mailable
     {
         return new Content(
             view: 'mails.ArticlePosted',
+            with: [
+                'article' => $this->article
+            ]
         );
     }
 
