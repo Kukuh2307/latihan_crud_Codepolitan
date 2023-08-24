@@ -27,6 +27,7 @@ class ArticlePosted extends Mailable
     /**
      * Get the message envelope.
      */
+    // adalah header dari email
     public function envelope(): Envelope
     {
         return new Envelope(
@@ -38,6 +39,7 @@ class ArticlePosted extends Mailable
     /**
      * Get the message content definition.
      */
+    // digunakan untuk mengirim data dari costructor agar bisa di tampilkan pada view mails.articlePosted.blade.php
     public function content(): Content
     {
         return new Content(
