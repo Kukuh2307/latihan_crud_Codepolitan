@@ -6,6 +6,7 @@ use App\Mail\ArticlePosted;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -65,6 +66,10 @@ class ArticleController extends Controller
         // untuk alur integrasi email dengan data database adalah semua variable di tampung lalu di kirimkan di mailer dengan parameter variabel tersebut.
         // Auth::user digunakan untuk mengambil email user yang sedang login
         Mail::to(Auth::user()->email)->send(new ArticlePosted($article)); // Perbaikan pada alamat email
+
+        // mengirim notifikasi lewat telegram menggunakan http request
+        $this->notify_telegram($article);
+
         // redirect ke halaman awal
         return redirect('article');
     }
@@ -146,5 +151,29 @@ class ArticleController extends Controller
         }
         Article::where('id', $id)->delete();
         return redirect('article');
+    }
+
+    // fungsi http request notifikasi telegram 
+    private function notify_telegram($article)
+    {
+        // api token yang di dapat dari botfather telegram
+        $api_token = "6314064448:AAG6x8jPsfVf0PKktGmEuMxRCvmJ5VEBawA";
+
+        // url telegram yang di gabung dengan token
+        $url = "https://api.telegram.org/bot{$api_token}/sendMessage";
+
+        // chat id dari channel telegram yang sudah di buat dengan menambahkan rawdatabot
+        $chat_id = -864078470;
+
+        // isi dari text telegram
+        $content = "Ada Postingan baru dengan judul: <strong>\"{$article->title}\"</strong>";
+
+        // beberapa data akan di tampung untuk di masukkan ke dalam post http
+        $data = [
+            'chat_id'   => $chat_id,
+            'text'      => $content,
+            'parse_mode' => "HTML",
+        ];
+        Http::post($url, $data);
     }
 }
